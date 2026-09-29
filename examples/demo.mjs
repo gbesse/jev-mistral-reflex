@@ -1,4 +1,5 @@
 // Objectif : démontrer la frontière de décision sans appel réseau.
+import assert from "node:assert/strict";
 import { routeReflex } from "../src/index.mjs";
 import { createFakeProvider } from "../src/jev.mjs";
 const jev = createFakeProvider(() => ({
@@ -13,17 +14,17 @@ const jev = createFakeProvider(() => ({
   },
   usage: { input_tokens: 45, output_tokens: 0 },
 }));
-const mistral = { respond: async ({ input }) => "draft:" + input };
-console.log(
-  await routeReflex("Find company 552100554", {
-    jev,
-    mistral,
-    tools: [
-      {
-        name: "lookup_company",
-        description: "Look up a French company by SIREN",
-      },
-      { name: "search_law", description: "Search French law" },
-    ],
-  }),
-);
+const mistral = { respond: async ({ input }) => "brouillon : " + input };
+const resultat = await routeReflex("Trouver l’entreprise 552100554", {
+  jev,
+  mistral,
+  tools: [
+    {
+      name: "lookup_company",
+      description: "Rechercher une entreprise française par SIREN",
+    },
+    { name: "search_law", description: "Rechercher dans le droit français" },
+  ],
+});
+assert.equal(resultat.tool, "lookup_company");
+console.log(JSON.stringify(resultat, null, 2));

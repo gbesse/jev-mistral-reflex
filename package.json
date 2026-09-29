@@ -1,6 +1,6 @@
 {
   "name": "@gbesse/jev-mistral-reflex",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Aiguille les décisions bornées vers Jev et confie les demandes ouvertes à un répondant compatible Mistral.",
   "type": "module",
   "license": "MIT",

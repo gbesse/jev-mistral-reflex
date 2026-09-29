@@ -2,7 +2,7 @@
 
 **Aiguille les décisions bornées vers Jev et confie les demandes ouvertes à un répondant compatible Mistral.**
 
-[![Tests](https://github.com/gbesse/jev-mistral-reflex/actions/workflows/test.yml/badge.svg)](https://github.com/gbesse/jev-mistral-reflex/actions/workflows/test.yml) [MIT](LICENSE) · Node.js 22+ · v0.1.1 · Documentation française
+[![Tests](https://github.com/gbesse/jev-mistral-reflex/actions/workflows/test.yml/badge.svg)](https://github.com/gbesse/jev-mistral-reflex/actions/workflows/test.yml) [MIT](LICENSE) · Node.js 22+ · v0.1.2 · Documentation française
 
 Cette petite cascade permet à Jev de choisir parmi des outils ou actions déclarés. Les demandes incertaines ou ouvertes sont transmises à un répondant compatible avec l’API Mistral.
 
@@ -16,6 +16,53 @@ npm run demo
 ```
 
 La démonstration utilise uniquement des données et probabilités synthétiques. Elle n’effectue aucun appel réseau et ne constitue pas une mesure de qualité de Jev.
+
+## Exemple exécutable
+
+Cet exemple aiguille une recherche d’entreprise vers l’outil déclaré. Il utilise un fournisseur Jev simulé : aucune clé API ni connexion réseau n’est nécessaire. L’assertion intégrée fait échouer la commande si le comportement attendu change.
+
+Le code complet de [`examples/demo.mjs`](examples/demo.mjs) est directement copiable :
+
+```js
+// Objectif : démontrer la frontière de décision sans appel réseau.
+import assert from "node:assert/strict";
+import { routeReflex } from "../src/index.mjs";
+import { createFakeProvider } from "../src/jev.mjs";
+const jev = createFakeProvider(() => ({
+  model: "jev-1.13.0",
+  answers: {
+    tool: {
+      type: "choice",
+      choice: "lookup_company",
+      probabilities: { none: 0.02, lookup_company: 0.94, search_law: 0.04 },
+      confidence: 0.94,
+    },
+  },
+  usage: { input_tokens: 45, output_tokens: 0 },
+}));
+const mistral = { respond: async ({ input }) => "brouillon : " + input };
+const resultat = await routeReflex("Trouver l’entreprise 552100554", {
+  jev,
+  mistral,
+  tools: [
+    {
+      name: "lookup_company",
+      description: "Rechercher une entreprise française par SIREN",
+    },
+    { name: "search_law", description: "Rechercher dans le droit français" },
+  ],
+});
+assert.equal(resultat.tool, "lookup_company");
+console.log(JSON.stringify(resultat, null, 2));
+```
+
+Lancez-le avec :
+
+```sh
+npm run demo
+```
+
+Résultat à repérer : `tool: lookup_company`.
 
 ## Utilisation de la bibliothèque
 
