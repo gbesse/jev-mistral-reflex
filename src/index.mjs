@@ -1,4 +1,4 @@
-// Purpose: Route closed-set agent decisions to Jev and open-ended or uncertain work to Mistral.
+// Objectif : implémenter la frontière de décision métier propre au dépôt.
 export function validateTools(tools) {
   if (!Array.isArray(tools) || tools.length < 2)
     throw new TypeError("At least two tools are required");

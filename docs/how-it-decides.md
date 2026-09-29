@@ -1,5 +1,5 @@
-# How it decides
+# Comment la décision est prise
 
-Jev Mistral Reflex provides a small cascade for Mistral agents: Jev selects among declared tools or actions, while uncertain and open-ended requests fall through to a Mistral-compatible responder.
+La bibliothèque orchestre une décision bornée mais n’exécute jamais l’outil choisi. Elle n’embarque aucun identifiant fournisseur et ne remplace pas l’ensemble des fonctions de l’API Mistral.
 
-The exact question and criteria live beside the call in [src/index.mjs](../src/index.mjs), making review and version control straightforward. Dates, identifiers, arithmetic, candidate generation, thresholds and state transitions remain code-owned. Synthetic demo probabilities are illustrative. Calibrate review thresholds on representative human labels before operational use.
+La question et les critères exacts sont versionnés dans [`src/index.mjs`](../src/index.mjs). Les probabilités de la démonstration sont synthétiques. Calibrez les seuils de revue sur des cas français annotés et représentatifs avant tout usage opérationnel.

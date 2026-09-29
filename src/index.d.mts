@@ -1,4 +1,4 @@
-// Purpose: Describe bounded tools and the Jev-to-Mistral routing cascade.
+// Objectif : décrire les types de l’API métier publique.
 import type { JevProvider } from "./jev.mjs";
 export type ReflexTool = { name: string; description: string };
 export function validateTools(tools: ReflexTool[]): ReflexTool[];
