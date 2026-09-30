@@ -2,7 +2,7 @@
 
 **Aiguille les décisions bornées vers Jev et confie les demandes ouvertes à un répondant compatible Mistral.**
 
-[![Tests](https://github.com/gbesse/jev-mistral-reflex/actions/workflows/test.yml/badge.svg)](https://github.com/gbesse/jev-mistral-reflex/actions/workflows/test.yml) [MIT](LICENSE) · Node.js 22+ · v0.1.2 · Documentation française
+[![Tests](https://github.com/gbesse/jev-mistral-reflex/actions/workflows/test.yml/badge.svg)](https://github.com/gbesse/jev-mistral-reflex/actions/workflows/test.yml) [MIT](LICENSE) · Node.js 22+ · v0.1.3 · Documentation française
 
 Cette petite cascade permet à Jev de choisir parmi des outils ou actions déclarés. Les demandes incertaines ou ouvertes sont transmises à un répondant compatible avec l’API Mistral.
 
@@ -59,10 +59,20 @@ console.log(JSON.stringify(resultat, null, 2));
 Lancez-le avec :
 
 ```sh
-npm run demo
+npm run demo:principal
 ```
 
 Résultat à repérer : `tool: lookup_company`.
+
+### Cas limite à tester
+
+Une confiance Jev insuffisante déclenche explicitement le repli Mistral. Le code se trouve dans [`examples/cas-limite.mjs`](examples/cas-limite.mjs).
+
+```sh
+npm run demo:limite
+```
+
+Résultat à repérer : `path: mistral · reason: low_confidence`. La commande `npm run demo` exécute les deux exemples.
 
 ## Utilisation de la bibliothèque
 
