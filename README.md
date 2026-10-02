@@ -2,7 +2,7 @@
 
 **Aiguille les décisions bornées vers Jev et confie les demandes ouvertes à un répondant compatible Mistral.**
 
-[![Tests](https://github.com/gbesse/jev-mistral-reflex/actions/workflows/test.yml/badge.svg)](https://github.com/gbesse/jev-mistral-reflex/actions/workflows/test.yml) [MIT](LICENSE) · Node.js 22+ · v0.1.3 · Documentation française
+[![Tests](https://github.com/gbesse/jev-mistral-reflex/actions/workflows/test.yml/badge.svg)](https://github.com/gbesse/jev-mistral-reflex/actions/workflows/test.yml) [MIT](LICENSE) · Node.js 22+ · v0.1.4 · Documentation française
 
 Cette petite cascade permet à Jev de choisir parmi des outils ou actions déclarés. Les demandes incertaines ou ouvertes sont transmises à un répondant compatible avec l’API Mistral.
 
@@ -102,6 +102,12 @@ TYPESAFE_API_KEY=... node scripts/live-smoke.mjs
 ```
 
 N’envoyez jamais de secret, de donnée personnelle ni de dossier sensible non expurgé. Évaluez le comportement sur un jeu représentatif de cas français avant tout usage opérationnel.
+
+## Parcours comparatif
+
+`npm run demo:parcours` produit un rapport JSON partageable pour **jev-mistral-reflex** : le scénario principal et la frontière déterministe. Chaque scénario garde sa sortie propre et échoue si son assertion ne passe plus. Les données et probabilités sont synthétiques ; aucun appel Jev n’est effectué.
+
+Cette vue permet de comparer rapidement les chemins de décision et de choisir quel exemple adapter à vos propres données sourcées.
 
 ## Validation
 
