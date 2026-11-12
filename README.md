@@ -121,3 +121,12 @@ npm run demo
 La CI exécute ces vérifications sous Node.js 22 et 24.
 
 Projet indépendant, sans affiliation avec TypeSafe AI ni avec l’administration française. Consultez la [documentation de l’API Jev](https://docs.typesafe.ai/api) et les [limites du modèle](https://docs.typesafe.ai/model-jaggedness/jev-1.13).
+
+
+## 2026-11-12 — FR / EN / ES
+
+FR : Protéger les identités d’outils et la catégorie de repli contre les collisions et seuils invalides.
+
+EN: Protect tool identities and fallback categories against collisions and invalid thresholds.
+
+ES: Proteger identidades de herramientas y categorías de respaldo frente a colisiones y umbrales inválidos.
